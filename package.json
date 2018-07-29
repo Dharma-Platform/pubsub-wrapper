@@ -1,0 +1,11 @@
+{
+  "name": "pubsub",
+  "version": "1.0.0",
+  "description": "PubSub Wrapper scripts collection for Dharma Platform",
+  "main": "index.js",
+  "private": true,
+  "dependencies": {
+    "@google-cloud/pubsub": "0.16.2",
+    "time-constants": "1.0.2"
+  }
+}
