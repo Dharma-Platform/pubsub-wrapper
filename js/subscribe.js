@@ -69,7 +69,7 @@ const listenForMessages = (subscriptionName, messageHandler, timeOut) => {
 const setupSubscriptionForListening = async (props) => {
   const { topicName, subscriptionName, messageHandler, timeOut } = props;
   let fullTopicName = `${topicName}-${process.env.NODE_ENV || "undefined"}`;
-  if (process.env.NODE_ENV !== "production") {
+  if ((process.env.NODE_ENV !== "production") || (process.env.POD_NAMESPACE != "live")) {
     fullTopicName = `${fullTopicName}-${process.env.LOGNAME || "undefined"}-${process.env.TRAVIS_BRANCH || "undefined"}-${process.env.POD_NAMESPACE || "undefined"}`;
   }
   const fullSubscriptionName = `${fullTopicName}-${subscriptionName}`;
