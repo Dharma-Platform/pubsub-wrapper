@@ -32,12 +32,15 @@ const publishMessage = async (topicName, data) => {
   const publisher = topic.publisher();
   // Publishes the message as a string to the topic
   const dataBuffer = Buffer.from(JSON.stringify(data));
-  return publisher.publish(dataBuffer)
-    .then((results) => {
-      const messageId = results[0];
-      console.log(`Message ${messageId} published.`);
-      return messageId;
-    });
+  try {
+    const results = await publisher.publish(dataBuffer);
+    const messageId = results[0];
+    console.log(`Message ${messageId} published.`);
+    return messageId;
+  } catch (err) {
+    console.log("Message not published.");
+    console.error(err);
+  }
 };
 
 module.exports = {
