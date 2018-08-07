@@ -68,7 +68,7 @@ const listenForMessages = (subscriptionName, messageHandler, timeOut) => {
 
 const setupSubscriptionForListening = async (props) => {
   const { topicName, subscriptionName, messageHandler, timeOut } = props;
-  const nodeEnv = process.env.NODE_ENV;
+  let nodeEnv = process.env.NODE_ENV;
   if (process.env.POD_NAMESPACE && process.env.POD_NAMESPACE !== "live") {
     nodeEnv = "beta";
   }
