@@ -17,8 +17,12 @@ const createTopic = async (topicName) => {
 
 const publishMessage = async (topicName, data) => {
   const allTopics = await listAllTopics();
-  let fullTopicName = `${topicName}-${process.env.NODE_ENV}`;
-  if ((process.env.NODE_ENV !== "production") || (process.env.POD_NAMESPACE != "live")) {
+  const nodeEnv = process.env.NODE_ENV;
+  if (process.env.POD_NAMESPACE && process.env.POD_NAMESPACE !== "live") {
+    nodeEnv = "beta";
+  }
+  let fullTopicName = `${topicName}-${nodeEnv}`;
+  if (nodeEnv !== "production") {
     fullTopicName = `${fullTopicName}-${process.env.LOGNAME}-${process.env.TRAVIS_BRANCH}-${process.env.POD_NAMESPACE}`;
   }
   let topic = allTopics.find(t => t.name.split("/").slice(-1).pop() === fullTopicName);
