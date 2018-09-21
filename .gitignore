@@ -1,3 +1,6 @@
 node_modules
 __pycache__
 *.lock
+pubsub.egg-info
+dist
+build
